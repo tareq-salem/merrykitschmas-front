@@ -1,0 +1,12 @@
+li {
+  display: block;
+  text-align: right;
+  text-decoration: none;
+  font-weight: bold;
+  color: green;
+  cursor: pointer;
+}
+
+hr {
+  margin: 0;
+}

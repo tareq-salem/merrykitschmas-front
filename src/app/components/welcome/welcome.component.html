@@ -1,0 +1,22 @@
+<app-order-toolbar></app-order-toolbar>
+<mat-grid-list [cols]='numberOfCols' rowHeight="1:1" (window:resize)="onResize()" >
+    <mat-grid-tile *ngFor="let product of products">
+        <ul class="card-container">
+            <li class="card-image">
+                <a href="/product/id">
+                    <img src='{{product?.img}}' alt="">
+                </a>
+            </li>
+            <li class="card-title">
+                <a href="/product/id">
+                    <h2>{{product?.title}}</h2>
+                </a>
+            </li>
+            <li class="card-info">
+                <p>{{product?.price}}</p>
+                <app-cart-button></app-cart-button>
+            </li>
+        </ul>
+    </mat-grid-tile>
+</mat-grid-list>
+

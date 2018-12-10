@@ -1,0 +1,17 @@
+footer {
+    background-color: rgb(75, 75, 75);
+    height: 200px;
+    text-align: center;
+    padding-top: 64px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    color: rgb(255, 255, 255);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(42, 178, 91);
+}
+
+p {
+    margin-bottom: 32px;
+}

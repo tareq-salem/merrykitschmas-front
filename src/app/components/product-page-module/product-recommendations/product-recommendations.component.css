@@ -1,0 +1,34 @@
+
+/*La DIV 'cell' prend la largeur de son conteneur */
+.cell img {
+  display: block;
+  margin-bottom: 20px;
+}
+    /*L'image prend au maximum 100% de son conteneur (cell)*/
+    .responsive-image {
+      max-width: 100%;
+    }
+
+
+/* En mode mobile */
+@media screen and (min-width: 600px) {
+  .grid {
+    display: flex;
+    flex-wrap: wrap;  /* les cells passent les unes sous les autres */
+    justify-content: space-around; /* Les cells prennent tout l'espace de la Grid */
+  }
+  .cell {
+    width: 48%; /* la cellule est divisee par 2 */
+  }
+}
+
+/* En mode desktop */
+@media screen and (min-width: 1000px) {
+  .grid {
+    display: flex;
+    justify-content: space-around; /* Les cells prennent tout l'espace de la Grid */
+  }
+  .cell {
+    width: calc(95% / 4); /* Chaque cellule prend la largeur du conteneur / 4 */
+  }
+}

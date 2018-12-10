@@ -1,0 +1,94 @@
+<form [formGroup]="form"
+      (ngSubmit)="addToCart(form.value)"
+      class="cart-form" >
+
+  <p>Livraison gratuite dès EUR 25 d'achats en France métropolitaine.</p>
+
+  <!-- STOCKS DISPONIBLE - INDISPONIBLE-->
+  <span class="stock-ok" *ngIf="isOnStock">
+    Stock disponible
+  </span>
+  <span class="stock-ko" *ngIf="!isOnStock">
+    Stock indisponible pour ce produit
+  </span>
+            <!-- Warning si le stock est inferieur a 10-->
+          <span *ngIf="isOnStock > 1 && isOnStock < 10"> :
+            <span class="stock-low">
+              Plus que {{isOnStock}} produits disponibles
+            </span>
+          </span>
+          <span *ngIf="isOnStock === 1"> :
+            <span class="stock-low">
+              Dernier produit disponible
+            </span>
+          </span>
+  <br>
+  <!-- CHECKBOX LIVRAISON RAPIDE -->
+      <mat-checkbox formControlName="fastShippingOption">
+        <p>Livraison en 1 jour (10)</p>
+      </mat-checkbox>
+
+  <!-- SELECTION TAILLE -->
+    <section class="select">
+      <span>Quelle est votre taille ? </span>
+      <mat-select class="mat-select"
+                  placeholder="Taille"
+                  formControlName="size"
+                  required>
+        <mat-option value="S">S</mat-option>
+        <mat-option value="M">M</mat-option>
+        <mat-option value="L">L</mat-option>
+        <mat-option value="XL">XL</mat-option>
+        <mat-option value="XXL">XXL</mat-option>
+      </mat-select>
+    </section>
+              <!-- Warning si la taille n'est pas renseignee -->
+              <mat-error *ngIf="size.touched && size.invalid">
+                <mat-error *ngIf="size.hasError('required')">
+                  Merci de renseignez votre taille.
+                </mat-error>
+              </mat-error>
+
+  <!-- INPUT QUANTITE DE PRODUITS -->
+    <section class="select">
+      <span>Combien de produits desirez-vous ? </span>
+      <input min="0" max="{{ isOnStock + 1 }}"
+             (change)="checkValue(qte)" #qte
+             matInput class="mat-select quantities"
+             placeholder="Quantite"
+             type="number"
+             formControlName="quantities"
+             required>
+    </section>
+              <!-- Warning si : qteSelectionne n'est pas renseignee || < 0 || > au stock -->
+              <mat-error *ngIf="quantities.touched && quantities.invalid">
+                <mat-error *ngIf="quantities.hasError('min')">
+                  Entrez une quantite superieur ou egale a 1 au minimum.
+                </mat-error>
+                <mat-error *ngIf="quantities.hasError('max')">
+                  Il n'y a que {{ isOnStock }} produits en stock.
+                </mat-error>
+                <mat-error *ngIf="quantities.hasError('required')">
+                  Selectionnez au moins 1 produit.
+                </mat-error>
+              </mat-error>
+
+
+  <!-- AJOUTER AU PANIER -->
+  <div class="btn">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!form.valid">
+      Ajouter au panier
+    </button>
+
+    <button (click)="navigateToCard()"
+      mat-raised-button
+      color="secondary"
+      [disabled]="!form.valid">
+      Acheter
+    </button>
+  </div>
+
+</form>

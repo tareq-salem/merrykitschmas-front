@@ -1,0 +1,25 @@
+mat-checkbox {
+    margin-left: 16px;
+}
+
+i {
+    margin-right: 16px;
+}
+
+.before-checkbox {
+    padding-bottom: 16px;
+}
+
+a {
+    color: #129b0d !important;
+}
+
+nav > a {
+    /* padding-left: 32px; */
+    font-size: 14px;
+    color: #ce1158 !important;
+}
+
+mat-nav-list {
+    margin-top : 64px;
+}

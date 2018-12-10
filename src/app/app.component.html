@@ -1,0 +1,10 @@
+<app-header></app-header>
+<mat-sidenav-container class="general-container">
+        <mat-sidenav mode="side" [opened]="isSideMenuVisible" role="navigation" class="container-sidenav">
+            <app-side-menu></app-side-menu>
+        </mat-sidenav>
+        <mat-sidenav-content class="container-body">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+<app-footer></app-footer>

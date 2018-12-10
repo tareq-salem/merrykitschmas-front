@@ -1,0 +1,35 @@
+<mat-nav-list>
+    <a mat-list-item (click)="openManSubMenu()"><i class="material-icons">{{manArrow}}</i>Homme</a>
+    <nav>
+        <a mat-list-item *ngIf="isManOpen">Pulls</a>
+        <a mat-list-item *ngIf="isManOpen">Bonnets</a>
+        <a mat-list-item *ngIf="isManOpen">Chaussettes</a>
+    </nav>
+    
+    <a mat-list-item (click)="openWomanSubMenu()"><i class="material-icons">{{womanArrow}}</i>Femme</a>
+    <nav>
+        <a mat-list-item *ngIf="isWomanOpen">Pulls</a>
+        <a mat-list-item *ngIf="isWomanOpen">Bonnets</a>
+        <a mat-list-item *ngIf="isWomanOpen">Chaussettes</a>
+    </nav>
+
+    <a mat-list-item (click)="openChildrenSubMenu()"><i class="material-icons">{{childrenArrow}}</i>Enfant</a>
+    <nav>
+        <a mat-list-item *ngIf="isChildOpen">Pulls</a>
+        <a mat-list-item *ngIf="isChildOpen">Bonnets</a>
+        <a mat-list-item *ngIf="isChildOpen">Chaussettes</a>
+    </nav>
+    <mat-divider></mat-divider>
+    
+    <a mat-list-item (click)="openThemeSubMenu()"><i class="material-icons">{{themeArrow}}</i>Thématiques</a>
+    <nav>
+        <a mat-list-item *ngIf="isThemeOpen">Theme 1</a>
+        <a mat-list-item *ngIf="isThemeOpen">Theme 2</a>
+        <a mat-list-item *ngIf="isThemeOpen">Theme 3</a>
+    </nav>
+    
+    <mat-divider class="before-checkbox"></mat-divider>
+
+    <mat-checkbox class="example-margin">En stock</mat-checkbox>
+    <mat-checkbox class="example-margin">Livraison rapide</mat-checkbox>
+</mat-nav-list>

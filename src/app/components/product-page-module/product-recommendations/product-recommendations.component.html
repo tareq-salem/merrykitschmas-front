@@ -1,0 +1,13 @@
+<h4>Suggestion pour la catégorie {{ category }}</h4>
+<!--<section class="suggestion">-->
+    <!--<div class="box box{{i}}" *ngFor="let suggestion of suggestions | slice:0:5; index as i">-->
+        <!--<img  src='{{ suggestion.url }}'>-->
+    <!--</div>-->
+<!--</section>-->
+
+
+<section class="grid">
+    <div class="cell cell{{i}}" *ngFor="let suggestion of suggestions | slice:0:4; index as i">
+        <img src='{{ suggestion.url }}' class="responsive-image">
+    </div>
+</section>

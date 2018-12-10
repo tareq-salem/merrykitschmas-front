@@ -1,0 +1,30 @@
+.general-container {
+    min-height: calc(100vh - 70px);
+    background: rgb(255, 255, 255);
+}
+
+.container-sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    /* background-image: linear-gradient(to top,  rgba(158, 10, 4, 1), rgba(178, 30, 24, 1),  rgba(178, 30, 24, 0.85));
+    background: rgba(178, 30, 24, 0.85);
+    background-color: #e81363;
+    background-color: #1ce8a4;
+    background-color: rgb(42, 178, 91);
+    background-color: rgb(125, 125, 125);
+    background-color: #13e822;
+    background-color: #ce1158;
+    background-color: #e81363; */
+    border: none;
+
+}
+
+.container-body {
+    background: rgb(255, 255, 255);
+}
+
+app-side-menu {
+    color: #129b0d;
+}
