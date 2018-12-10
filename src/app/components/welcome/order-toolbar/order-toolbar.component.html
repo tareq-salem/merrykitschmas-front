@@ -1,5 +1,4 @@
 <mat-toolbar>
-    <mat-checkbox class="example-margin">Tri par date</mat-checkbox>
-    <mat-checkbox class="example-margin">Tri par prix</mat-checkbox>
-    <mat-checkbox class="example-margin">Tri par popularité</mat-checkbox>
+    <button mat-button (click)='onDateClick()'>Tri par date<i class="material-icons">{{dateArrow}}</i></button>
+    <button mat-button (click)='onPriceClick()'>Tri par prix<i class="material-icons">{{priceArrow}}</i></button>
 </mat-toolbar>

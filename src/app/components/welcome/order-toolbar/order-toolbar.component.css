@@ -3,6 +3,13 @@ mat-toolbar {
     background-color: #fff;
 }
 
-mat-checkbox {
+.mat-button {
+    background-color: #CE1158;
     margin-right: 32px;
+    color: #fff;
+}
+
+.mat-button:hover {
+    background-color: #fff;
+    color: #CE1158;
 }
