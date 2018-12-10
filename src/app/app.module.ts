@@ -1,11 +1,11 @@
 // COMPONENTS
 import { AppComponent } from './app.component';
     // HOME PAGE
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from './components/shared/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { OrderToolbarComponent } from './components/welcome/order-toolbar/order-toolbar.component';
     // PRODUCT PAGE
 import { ProductComponent } from './components/product-page-module/product.component';
@@ -22,7 +22,7 @@ import {
 import { AddReviewComponent } from './components/product-page-module/product-users-comments-details/add-review/add-review.component';
 import { ListReviewsComponent } from './components/product-page-module/product-users-comments-details/list-reviews/list-reviews.component';
   // SHARED
-import { CartButtonComponent } from './components/share/cart-button/cart-button.component';
+import { CartButtonComponent } from './components/shared/cart-button/cart-button.component';
 
 // MODULES
 import { BrowserModule } from '@angular/platform-browser';
@@ -52,10 +52,20 @@ import {
 
 // ROUTES
 import { RouterModule, Routes } from '@angular/router';
+import { CartComponent } from './components/cart/cart.component';
+import { OrderSuccessComponent } from './components/order-success/order-success.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { LoginComponent } from './components/login/login.component';
+import { CheckOutComponent } from './components/check-out/check-out.component';
 const routes: Routes = [
-  { path: '', component: WelcomeComponent},
-  { path: 'product/id', component: ProductComponent},
-  { path: '**', component: PageNotFoundComponent }
+    { path: 'sigin', component: SigninComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'check-out', component: CheckOutComponent },
+    { path: '', component: WelcomeComponent},
+    { path: 'product/:productId', component: ProductComponent},
+    { path: 'cart', component: CartComponent },
+    { path: 'order-success', component: OrderSuccessComponent },
+    { path: '**', component: PageNotFoundComponent }
 ];
 
 
@@ -77,7 +87,12 @@ const routes: Routes = [
     ProductUsersCommentsDetailsComponent,
     AddReviewComponent,
     ListReviewsComponent,
-    CartButtonComponent
+    CartButtonComponent,
+    CartComponent,
+    OrderSuccessComponent,
+    LoginComponent,
+    CheckOutComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,

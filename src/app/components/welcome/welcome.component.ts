@@ -1,5 +1,7 @@
-import { CategoriesService } from './../../services/categories/categories.service';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { ProductsService } from '../../services/products/products.service';
+import { CategoriesService } from '../../services/categories/categories.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -10,21 +12,25 @@ export class WelcomeComponent implements OnInit {
     numberOfCols = 4;
     public products: any[];
 
-    constructor(private categoriesService: CategoriesService) {
-
+    constructor(
+        private router: Router,
+        private categoriesService: CategoriesService,
+        private productService: ProductsService) {
     }
 
     ngOnInit() {
         this.onResize();
+        // On recupere les produits
+        this.productService.getAll()
+        .subscribe( (res: any[]) => {
+            this.products = res;
+            console.log(res);
+        });
 
+        // On recupere les categories
         // this.categoriesService.getAllProducts()
-        // .subscribe( (res: any[]) => {
-        //     this.products = res;
-        // });
-
-        this.categoriesService.getAllProducts()
-            .then((products: any[]) => this.products = products)
-            .catch(error => console.log(error));
+        //     .then((products: any[]) => this.products = products)
+        //     .catch(error => console.log(error));
     }
 
     onResize() {
@@ -39,5 +45,9 @@ export class WelcomeComponent implements OnInit {
         } else {
             this.numberOfCols = 3;
         }
+    }
+
+    getProduct(id): void {
+        this.router.navigate(['/product', id]);
     }
 }
