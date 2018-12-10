@@ -1,8 +1,13 @@
 button {
-    color: white;
+    color: #fff;
     background-color: #129b0d;
 }
 
 i {
     padding-left: 8px;
+}
+
+button:hover {
+    color: #129b0d;
+    background-color: #fff;
 }

@@ -10,7 +10,7 @@ export class OrderToolbarComponent implements OnInit {
     dateArrow = 'arrow_drop_down';
     priceArrow = '';
     constructor() { }
-    @Input() orderBy: string;
+    @Input() orderby = 'ddesc';
 
     ngOnInit() {
     }
@@ -19,24 +19,22 @@ export class OrderToolbarComponent implements OnInit {
         this.priceArrow = '';
         if (this.dateArrow === 'arrow_drop_down') {
             this.dateArrow = 'arrow_drop_up';
-            this.orderBy = 'recentDate';
+            this.orderby = 'dasc';
         } else {
             this.dateArrow = 'arrow_drop_down';
-            this.orderBy = 'olderDate';
+            this.orderby = 'ddesc';
         }
-        console.log(this.orderBy);
     }
 
     onPriceClick() {
         this.dateArrow = '';
         if (this.priceArrow === 'arrow_drop_down') {
             this.priceArrow = 'arrow_drop_up';
-            this.orderBy = 'increasingPrice';
+            this.orderby = 'pasc';
         } else {
             this.priceArrow = 'arrow_drop_down';
-            this.orderBy = 'decreasingPrice';
+            this.orderby = 'pdesc';
         }
-        console.log(this.orderBy);
     }
 
 }
