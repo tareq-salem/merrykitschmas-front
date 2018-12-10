@@ -1,11 +1,9 @@
 // COMPONENTS
 import { AppComponent } from './app.component';
+
     // HOME PAGE
-import { HeaderComponent } from './components/shared/header/header.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { FooterComponent } from './components/shared/footer/footer.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { OrderToolbarComponent } from './components/welcome/order-toolbar/order-toolbar.component';
     // PRODUCT PAGE
 import { ProductComponent } from './components/product-page-module/product.component';
@@ -21,7 +19,10 @@ import {
 } from './components/product-page-module/product-users-comments-details/product-users-comments-details.component';
 import { AddReviewComponent } from './components/product-page-module/product-users-comments-details/add-review/add-review.component';
 import { ListReviewsComponent } from './components/product-page-module/product-users-comments-details/list-reviews/list-reviews.component';
-  // SHARED
+    // SHARED
+import { HeaderComponent } from './components/shared/header/header.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { CartButtonComponent } from './components/shared/cart-button/cart-button.component';
 
 // MODULES
