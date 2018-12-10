@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import {CartsService} from '../../../services/carts/carts.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-cart-control',
@@ -8,9 +9,18 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./cart-control.component.css']
 })
 export class CartControlComponent implements OnInit {
-    isOnStock = 9;
+    // Tailles
+    @Input() sizeSQte: number;
+    @Input() sizeMQte: number;
+    @Input() sizeLQte: number;
+    @Input() sizeXLQte: number;
+    @Input() sizeXXLQte: number;
+
+    // Qte disponible / selectionnee
+    isOnStock;
     qteSelected;
 
+    // Formulaire d'envoie au panier
     form = new FormGroup({
       size : new FormControl('', [
           Validators.required,
@@ -23,52 +33,43 @@ export class CartControlComponent implements OnInit {
       ]),
     });
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private cartsService: CartsService,
+        private router: Router) {
     }
 
     ngOnInit() {
-      this.http.get('https://jsonplaceholder.typicode.com/albums') // TODO : Changer l'url
-          .subscribe( (res: number) => {
-              this.isOnStock = res[8].id; // TODO : res[idArticle].stockQteBDD ---- ici ---- idArticle = 65 && stockQteBDD = id
-          });
+        this.isOnStock = this.sizeSQte + this.sizeMQte + this.sizeLQte + this.sizeXLQte + this.sizeXXLQte;
     }
 
   // METHODES PUBLIQUE
-
     // Contraindre la quantite de produits selectionne a min
-    public checkValue(qte): void {
+    public checkStock(qte): void {
         this.qteSelected = qte;
-        console.log(qte.value);
-        if (qte.value < 0) {
+        if (qte.value < 0) { // Si l'utilisateur selectionne une qte negative on force le form a zero
             qte.value = 0;
-        } else if (qte.value > this.isOnStock) {
+        } else if (qte.value > this.isOnStock) { // Si le user desire plus que le stock disponible on force a la qte max
             qte.value = this.isOnStock;
         }
     }
 
-    addToCart(cart) {
-        console.log('ajouté au panié', cart);
-        // TODO : On envoie les informations au service
+    // Ajouter au panier
+    public addToCart(cart): void {
+        this.cartsService.addProduct(cart);
     }
 
-    navigateToCard() {
-        // TODO : Ajouter la navigation vers le panier
-        console.log('JE VAIS A LA PAGE PANIER');
+    // Aller au panier
+    public navigateToCard(): void {
+        this.router.navigate(['cart']);
     }
 
   // METHODES PRIVEES
-
 
   // GETTERS & SETTERS
   get size() {
       return this.form.get('size');
   }
-  get fastShippingOption() {
-      return this.form.get('fastShippingOption');
-  }
-  get stock() {
-      return this.form.get('stock');
-  }
+
   get quantities() {
       return this.form.get('quantities');
   }

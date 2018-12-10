@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-product-users-comments',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-users-comments.component.css']
 })
 export class ProductUsersCommentsComponent implements OnInit {
-  comments = 1;
+  @Input() commentQte: number;
 
   constructor() { }
 

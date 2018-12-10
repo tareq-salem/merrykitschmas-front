@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
@@ -7,6 +7,8 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./product-picture.component.css']
 })
 export class ProductPictureComponent implements OnInit {
+    @Input() picture: string;
+
     url = 'https://jsonplaceholder.typicode.com/photos';
     image = 'http://www.sportune.fr/wp-content/uploads/2017/11/Adil-Rami-pull-Noel-OM-.jpg';
 

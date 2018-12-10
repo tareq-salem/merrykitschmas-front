@@ -1,41 +1,45 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable, Input} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+
+import { environment } from '../../../environments/environment';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
+  urlProduct = undefined;
 
-    uri = 'http://localhost:8000/';
-    getDatas: any[];
+  constructor(
+      private router: Router,
+      private http: HttpClient
+  ) {
+    // On recupere la valeur de l'url avec l'id du produit
+    this.router.events.subscribe(e => {
+      if (e instanceof NavigationEnd) {
+        this.urlProduct = environment.url + e.url;
+      }
+    });
+  }
 
-    constructor(private http: HttpClient) { }
+  // create(product) {
+  //   this.http.post(this.urlProduct, product);
+  // }
 
-    getAllProducts() {
-        const allProducts = this.uri + 'products/';
+  getAll() {
+    return this.http.get(environment.url + '/products?order=ddesc').pipe(
+        map( res => res )
+    );
+  }
 
-        return new Promise ((resolve, reject) => {
-            this.http.get(allProducts).subscribe(
-                (response: any[]) => {
-                    this.getDatas = response;
-                    resolve(this.getDatas);
-                },
-                (error) => reject(error)
-            );
-        });
-    }
+  get() {
+    return this.http.get(this.urlProduct).pipe(
+        map( res => res )
+    );
+  }
 
-    sortProducts(sortParam) {
-        const productsSortedUrl = this.uri + 'products?orderby=' + sortParam;
+  update() {}
 
-        return new Promise ((resolve, reject) => {
-            this.http.get(productsSortedUrl).subscribe(
-                (response: any[]) => {
-                    this.getDatas = response;
-                    resolve(this.getDatas);
-                },
-                (error) => reject(error)
-            );
-        });
-    }
+  delete() {}
 }

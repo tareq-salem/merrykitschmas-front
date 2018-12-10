@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CommentsService} from '../../../../services/comments/comments.service';
 
@@ -8,6 +8,8 @@ import {CommentsService} from '../../../../services/comments/comments.service';
   styleUrls: ['./list-reviews.component.css']
 })
 export class ListReviewsComponent implements OnInit {
+    @Input() product: any[];
+
     datas: any[];
 
     constructor(
