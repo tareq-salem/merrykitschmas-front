@@ -1,0 +1,59 @@
+mat-card {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+}
+
+mat-grid-tile {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+img {
+    width: 325px;
+    height: 100%;
+    object-fit: cover;
+}
+
+h2 {
+    margin: 0;
+    font-size: 24px;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+}
+
+.card-container {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.card-image {
+    height: 70%;
+    width: 100%;
+}
+
+.card-title {
+    height: 8%;
+    width: 100%;
+}
+
+.card-info {
+    height: 22%;
+    width: 100%;
+}
+
+p {
+    font-size: 12px;
+    margin-bottom:0 0 8px 0;
+    padding: 0;
+}

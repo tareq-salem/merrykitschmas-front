@@ -53,6 +53,7 @@ import {
 
 // ROUTES
 import { RouterModule, Routes } from '@angular/router';
+import { WelcomeGridComponent } from './components/welcome/welcome-grid/welcome-grid.component';
 const routes: Routes = [
   { path: '', component: WelcomeComponent},
   { path: 'product/id', component: ProductComponent},
@@ -78,7 +79,8 @@ const routes: Routes = [
     ProductUsersCommentsDetailsComponent,
     AddReviewComponent,
     ListReviewsComponent,
-    CartButtonComponent
+    CartButtonComponent,
+    WelcomeGridComponent
   ],
   imports: [
     BrowserModule,

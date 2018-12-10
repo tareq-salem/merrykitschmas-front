@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-order-toolbar',
@@ -10,9 +10,12 @@ export class OrderToolbarComponent implements OnInit {
     dateArrow = 'arrow_drop_down';
     priceArrow = '';
     constructor() { }
-    @Input() orderby = 'ddesc';
+    orderby = 'ddesc';
+
+    @Output() orderbyEvent = new EventEmitter<string>();
 
     ngOnInit() {
+        this.sendOrderby();
     }
 
     onDateClick() {
@@ -35,6 +38,10 @@ export class OrderToolbarComponent implements OnInit {
             this.priceArrow = 'arrow_drop_down';
             this.orderby = 'pdesc';
         }
+    }
+
+    sendOrderby() {
+        this.orderbyEvent.emit(this.orderby);
     }
 
 }
