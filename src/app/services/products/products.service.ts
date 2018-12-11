@@ -14,14 +14,15 @@ export class ProductsService {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
         this.urlProduct = environment.url + e.url;
+        console.log('URL PRODUIT : ', this.urlProduct);
       }
     });
   }
 
 
   public sortProducts(sortParam) {
-    console.log('blsblslbslb');
     const productsSortedUrl = environment.url + '/products?orderby=' + sortParam;
+    console.log(productsSortedUrl);
 
     return new Promise ((resolve, reject) => {
       this.http.get(productsSortedUrl).subscribe(
