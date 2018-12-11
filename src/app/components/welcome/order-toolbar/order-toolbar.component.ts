@@ -18,7 +18,8 @@ export class OrderToolbarComponent implements OnInit {
         this.sendOrderby();
     }
 
-    onDateClick() {
+    onDateClick(event) {
+        this.sendOrderby();
         this.priceArrow = '';
         if (this.dateArrow === 'arrow_drop_down') {
             this.dateArrow = 'arrow_drop_up';
@@ -27,9 +28,11 @@ export class OrderToolbarComponent implements OnInit {
             this.dateArrow = 'arrow_drop_down';
             this.orderby = 'ddesc';
         }
+        this.applySelectColor(event);
     }
 
-    onPriceClick() {
+    onPriceClick(event) {
+        this.sendOrderby();
         this.dateArrow = '';
         if (this.priceArrow === 'arrow_drop_down') {
             this.priceArrow = 'arrow_drop_up';
@@ -38,10 +41,18 @@ export class OrderToolbarComponent implements OnInit {
             this.priceArrow = 'arrow_drop_down';
             this.orderby = 'pdesc';
         }
+        this.applySelectColor(event);
     }
 
     sendOrderby() {
         this.orderbyEvent.emit(this.orderby);
     }
 
+    applySelectColor(event) {
+        const buttons = document.getElementsByClassName('order');
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('isOrdering');
+        }
+        event.target.closest('button').classList.add('isOrdering');
+    }
 }

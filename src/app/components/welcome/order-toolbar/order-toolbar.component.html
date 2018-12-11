@@ -1,4 +1,4 @@
 <mat-toolbar>
-    <button mat-button (click)='onDateClick()' (click)='sendOrderby()'>Tri par date<i class="material-icons">{{dateArrow}}</i></button>
-    <button mat-button (click)='onPriceClick()' (click)='sendOrderby()'>Tri par prix<i class="material-icons">{{priceArrow}}</i></button>
+    <button mat-button class="order isOrdering" (click)='onDateClick($event)'>Tri par date<i class="material-icons">{{dateArrow}}</i></button>
+    <button mat-button class="order" (click)='onPriceClick($event)'>Tri par prix<i class="material-icons">{{priceArrow}}</i></button>
 </mat-toolbar>
