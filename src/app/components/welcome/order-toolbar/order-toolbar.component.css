@@ -5,12 +5,12 @@ mat-toolbar {
 }
 
 .mat-button {
-    background-color: #CE1158;
+    background-color: #fff;
     margin-right: 32px;
-    color: #fff;
+    color: #CE1158;
 }
 
-.mat-button:hover {
-    background-color: #fff;
-    color: #CE1158;
+.isOrdering {
+    background-color: #CE1158;
+    color: #fff;
 }
