@@ -59,6 +59,7 @@ import { OrderSuccessComponent } from './components/order-success/order-success.
 import { SigninComponent } from './components/signin/signin.component';
 import { LoginComponent } from './components/login/login.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
+import { EuroCurrencyPipe } from './pipes/euroCurrency/euro-currency.pipe';
 const routes: Routes = [
     { path: 'sigin', component: SigninComponent },
     { path: 'login', component: LoginComponent },
@@ -95,7 +96,8 @@ const routes: Routes = [
     OrderSuccessComponent,
     LoginComponent,
     CheckOutComponent,
-    SigninComponent
+    SigninComponent,
+    EuroCurrencyPipe
   ],
   imports: [
     BrowserModule,
