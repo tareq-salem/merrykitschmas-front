@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-product-picture',
@@ -7,17 +6,11 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./product-picture.component.css']
 })
 export class ProductPictureComponent implements OnInit {
-    url = 'https://jsonplaceholder.typicode.com/photos';
-    image = 'http://www.sportune.fr/wp-content/uploads/2017/11/Adil-Rami-pull-Noel-OM-.jpg';
+    @Input() picture: string;
 
-    constructor(private http: HttpClient) { }
+    constructor() { }
 
     ngOnInit() {
-        // // A l'init du composant on recupere l'image du produit
-        // this.http.get(this.url)
-        //     .subscribe( (res) => {
-        //         this.image = res[0].url;
-        //     });
     }
 
 }

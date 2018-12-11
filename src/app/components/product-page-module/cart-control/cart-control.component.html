@@ -12,7 +12,7 @@
     Stock indisponible pour ce produit
   </span>
             <!-- Warning si le stock est inferieur a 10-->
-          <span *ngIf="isOnStock > 1 && isOnStock < 10"> :
+          <span *ngIf="isOnStock > 1 && isOnStock <= 10"> :
             <span class="stock-low">
               Plus que {{isOnStock}} produits disponibles
             </span>
@@ -35,11 +35,11 @@
                   placeholder="Taille"
                   formControlName="size"
                   required>
-        <mat-option value="S">S</mat-option>
-        <mat-option value="M">M</mat-option>
-        <mat-option value="L">L</mat-option>
-        <mat-option value="XL">XL</mat-option>
-        <mat-option value="XXL">XXL</mat-option>
+        <mat-option *ngIf="sizeSQte > 0" value="S">S</mat-option>
+        <mat-option *ngIf="sizeMQte > 0" value="M">M</mat-option>
+        <mat-option *ngIf="sizeLQte > 0" value="L">L</mat-option>
+        <mat-option *ngIf="sizeXLQte > 0" value="XL">XL</mat-option>
+        <mat-option *ngIf="sizeXXLQte > 0" value="XXL">XXL</mat-option>
       </mat-select>
     </section>
               <!-- Warning si la taille n'est pas renseignee -->
@@ -53,7 +53,7 @@
     <section class="select">
       <span>Combien de produits desirez-vous ? </span>
       <input min="0" max="{{ isOnStock + 1 }}"
-             (change)="checkValue(qte)" #qte
+             (change)="checkStock(qte)" #qte
              matInput class="mat-select quantities"
              placeholder="Quantite"
              type="number"

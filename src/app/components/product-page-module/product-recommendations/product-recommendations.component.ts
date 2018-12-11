@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
@@ -7,6 +7,8 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./product-recommendations.component.css']
 })
 export class ProductRecommendationsComponent implements OnInit {
+  @Input() product: any[];
+
   url = 'https://jsonplaceholder.typicode.com/photos';
   category: any[];
   suggestions: any[];

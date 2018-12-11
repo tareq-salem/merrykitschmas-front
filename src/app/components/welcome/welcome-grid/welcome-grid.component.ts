@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange  } from '@angular/core';
-import { ProductsService } from './../../../services/products/products.service';
+import { Component, OnInit, Input, OnChanges  } from '@angular/core';
+import {ProductsService} from '../../../services/products/products.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-welcome-grid',
@@ -11,7 +12,9 @@ export class WelcomeGridComponent implements OnInit, OnChanges {
     numberOfCols = 4;
     @Input() orderby: string;
     public products: any[];
-    constructor(private productsService: ProductsService) { }
+    constructor(
+        private router: Router,
+        private productsService: ProductsService) { }
 
     ngOnChanges() {
         this.getProductsRequest(this.orderby);
@@ -35,9 +38,13 @@ export class WelcomeGridComponent implements OnInit, OnChanges {
         }
     }
 
-    getProductsRequest(params) {
+    getProductsRequest(params): void {
         this.productsService.sortProducts(params)
             .then((products: any[]) => this.products = products)
             .catch(error => console.log(error));
+    }
+
+    getProductRoute(id): void {
+        this.router.navigate(['/product', id]);
     }
 }
