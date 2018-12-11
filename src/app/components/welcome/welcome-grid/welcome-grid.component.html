@@ -2,12 +2,12 @@
     <mat-grid-tile *ngFor="let product of products">
         <ul class="card-container">
             <li class="card-image">
-                <a href="/product/id">
+                <a (click)="getProductRoute(product?.id)">
                     <img src='{{product?.image}}' alt="">
                 </a>
             </li>
             <li class="card-title">
-                <a href="/product/id">
+                <a (click)="getProductRoute(product?.id)">
                     <h2>{{product?.name}}</h2>
                 </a>
             </li>

@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
     // HOME PAGE
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { WelcomeGridComponent } from './components/welcome/welcome-grid/welcome-grid.component';
 import { OrderToolbarComponent } from './components/welcome/order-toolbar/order-toolbar.component';
     // PRODUCT PAGE
 import { ProductComponent } from './components/product-page-module/product.component';
@@ -75,6 +76,7 @@ const routes: Routes = [
     AppComponent,
     HeaderComponent, // HOME
     WelcomeComponent, // HOMEPAGE
+    WelcomeGridComponent,
     SideMenuComponent, // SIDE MENU
     FooterComponent, // FOOTER
     ProductComponent, // PRODUCT PAGE

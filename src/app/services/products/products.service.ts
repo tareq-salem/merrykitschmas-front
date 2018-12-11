@@ -1,21 +1,16 @@
-import {Injectable, Input} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
-import {NavigationEnd, Router} from '@angular/router';
-
+import { NavigationEnd, Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
   urlProduct = undefined;
 
-  constructor(
-      private router: Router,
-      private http: HttpClient
-  ) {
-    // On recupere la valeur de l'url avec l'id du produit
+  constructor(private router: Router, private http: HttpClient) {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
         this.urlProduct = environment.url + e.url;
@@ -23,6 +18,20 @@ export class ProductsService {
     });
   }
 
+
+  public sortProducts(sortParam) {
+    console.log('blsblslbslb');
+    const productsSortedUrl = environment.url + '/products?orderby=' + sortParam;
+
+    return new Promise ((resolve, reject) => {
+      this.http.get(productsSortedUrl).subscribe(
+          (response: any[]) => { resolve(response); },
+          (error) => reject(error)
+      );
+    });
+  }
+
+  /* -------------------------- CRUD -------------------------- */
   // create(product) {
   //   this.http.post(this.urlProduct, product);
   // }
@@ -32,6 +41,19 @@ export class ProductsService {
         map( res => res )
     );
   }
+  // VERSION JULIEN
+  // getAllProducts() {
+  //   const allProducts = environment.url + '/products';
+  //
+  //   return new Promise ((resolve, reject) => {
+  //     this.http.get(allProducts).subscribe(
+  //         (response: any[]) => {
+  //           resolve(response);
+  //         },
+  //         (error) => reject(error)
+  //     );
+  //   });
+  // }
 
   get() {
     return this.http.get(this.urlProduct).pipe(
