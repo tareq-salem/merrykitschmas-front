@@ -17,11 +17,8 @@
             </app-product-description>
 
             <app-cart-control
-                    [sizeSQte]="product[0]?.productParameters[0].quantity"
-                    [sizeLQte]="product[0]?.productParameters[1].quantity"
-                    [sizeMQte]="product[0]?.productParameters[2].quantity"
-                    [sizeXLQte]="product[0]?.productParameters[3].quantity"
-                    [sizeXXLQte]="product[0]?.productParameters[4].quantity"
+                    [sizeNames]="sizeNames"
+                    [sizeQtes]="sizeQtes"
             ></app-cart-control>
         </section>
     </section>
