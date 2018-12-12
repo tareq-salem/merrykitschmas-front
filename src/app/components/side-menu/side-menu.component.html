@@ -30,6 +30,6 @@
     
     <mat-divider class="before-checkbox"></mat-divider>
 
-    <mat-checkbox class="example-margin">En stock</mat-checkbox>
-    <mat-checkbox class="example-margin">Livraison rapide</mat-checkbox>
+    <mat-checkbox class="example-margin" (click)="sendStockParam()">En stock</mat-checkbox>
+    <mat-checkbox class="example-margin" (click)="sendDeliveryParam()">Livraison rapide</mat-checkbox>
 </mat-nav-list>

@@ -23,8 +23,23 @@ input {
     padding-bottom: 0px;
 }
 
-mat-form-field {
+form {
     margin-right: 32px;
+}
+
+input {
+    border: none;
+    background-color: #ce1158;
+    color: white;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+input::placeholder {
+    color: white;
 }
 
 .search-icon {
