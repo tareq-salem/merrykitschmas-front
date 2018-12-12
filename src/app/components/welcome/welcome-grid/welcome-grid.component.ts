@@ -17,7 +17,7 @@ export class WelcomeGridComponent implements OnInit, OnChanges {
         private productsService: ProductsService) { }
 
     ngOnChanges() {
-        this.getProductsRequest(this.orderby);
+        this.getProductsRequest();
     }
 
     ngOnInit() {
@@ -38,8 +38,11 @@ export class WelcomeGridComponent implements OnInit, OnChanges {
         }
     }
 
-    getProductsRequest(params): void {
-        this.productsService.sortProducts(params)
+    getProductsRequest(): void {
+        // this.productsService.sortProducts(params)
+        //     .then((products: any[]) => this.products = products)
+        //     .catch(error => console.log(error));
+        this.productsService.sendRequest()
             .then((products: any[]) => this.products = products)
             .catch(error => console.log(error));
     }

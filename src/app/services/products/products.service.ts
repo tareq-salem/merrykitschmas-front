@@ -16,37 +16,45 @@ export class ProductsService {
         theme: '',
         stock: '',
         opt: '',
-        orderby: 'ddsc'
+        orderby: ''
     };
 
   constructor(private router: Router, private http: HttpClient) {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
         this.urlProduct = environment.url + e.url;
-        console.log('URL PRODUIT : ', this.urlProduct);
       }
     });
   }
 
   public getFullRequest() {
-        let url = environment.url + '/products';
-        if (this.request.orderby !== '') { url += '?orderby=' + this.request.orderby; }
-        if (this.request.stock !== '') { url += '?stock=' + this.request.stock; }
-        if (this.request.opt !== '') { url += '?opt=' + this.request.opt; }
+        let url = environment.url + '/products?';
+        if (this.request.orderby !== '') { url += 'orderby=' + this.request.orderby; }
+        if (this.request.stock !== '') { url += '&stock=' + this.request.stock; }
+        if (this.request.opt !== '') { url += '&opt=' + this.request.opt; }
         return url;
   }
 
-  public sortProducts(sortParam) {
-    const productsSortedUrl = environment.url + '/products?orderby=' + sortParam;
-    console.log(productsSortedUrl);
-
-    return new Promise ((resolve, reject) => {
-      this.http.get(productsSortedUrl).subscribe(
-          (response: any[]) => { resolve(response); },
-          (error) => reject(error)
-      );
-    });
+  public sendRequest() {
+      const url = this.getFullRequest();
+      return new Promise ((resolve, reject) => {
+        this.http.get(url).subscribe(
+            (response: any[]) => { resolve(response); },
+            (error) => reject(error)
+        );
+      });
   }
+
+//   public sortProducts(sortParam) {
+//     const productsSortedUrl = environment.url + '/products?orderby=' + sortParam;
+
+//     return new Promise ((resolve, reject) => {
+//       this.http.get(productsSortedUrl).subscribe(
+//           (response: any[]) => { resolve(response); console.log(sortParam); },
+//           (error) => reject(error)
+//       );
+//     });
+//   }
 
   /* -------------------------- CRUD -------------------------- */
   // create(product) {
