@@ -1,3 +1,4 @@
+import { ProductsService } from './../../../services/products/products.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -9,13 +10,15 @@ export class OrderToolbarComponent implements OnInit {
 
     dateArrow = 'arrow_drop_down';
     priceArrow = '';
-    constructor() { }
+
+    constructor(private productsService: ProductsService) { }
     orderby = 'ddesc';
 
     @Output() orderbyEvent = new EventEmitter<string>();
 
     ngOnInit() {
         this.sendOrderby();
+        this.productsService.request.orderby = 'ddsc';
     }
 
     onDateClick(event) {
@@ -24,9 +27,10 @@ export class OrderToolbarComponent implements OnInit {
         if (this.dateArrow === 'arrow_drop_down') {
             this.dateArrow = 'arrow_drop_up';
             this.orderby = 'dasc';
+            this.productsService.request.orderby = 'ddsc';
         } else {
             this.dateArrow = 'arrow_drop_down';
-            this.orderby = 'ddesc';
+            this.orderby = 'dasc';
         }
         this.applySelectColor(event);
     }

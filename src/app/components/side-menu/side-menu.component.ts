@@ -1,3 +1,4 @@
+import { ProductsService } from './../../services/products/products.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,16 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideMenuComponent implements OnInit {
 
-  isManOpen = false;
-  isWomanOpen = false;
-  isChildOpen = false;
-  isThemeOpen = false;
+    isManOpen = false;
+    isWomanOpen = false;
+    isChildOpen = false;
+    isThemeOpen = false;
+    isStockChecked = false;
+    isDeliveryChecked = false;
 
-  manArrow = 'arrow_right';
-  womanArrow = 'arrow_right';
-  childrenArrow = 'arrow_right';
-  themeArrow = 'arrow_right';
-  constructor() { }
+    manArrow = 'arrow_right';
+    womanArrow = 'arrow_right';
+    childrenArrow = 'arrow_right';
+    themeArrow = 'arrow_right';
+
+  constructor(private productsService: ProductsService ) { }
 
   ngOnInit() {
   }
@@ -38,4 +42,26 @@ export class SideMenuComponent implements OnInit {
     this.isThemeOpen = !this.isThemeOpen;
     this.themeArrow = (this.themeArrow === 'arrow_right') ? 'arrow_drop_down' : 'arrow_right';
   }
+
+    sendStockParam() {
+        this.isStockChecked = !this.isStockChecked;
+        if ( this.isStockChecked ) {
+            this.productsService.request.stock = '1';
+            console.log('stock checked : ' + this.productsService.getFullRequest());
+        } else {
+            this.productsService.request.stock = '';
+            console.log('stock unchecked ' + this.productsService.getFullRequest());
+        }
+    }
+
+    sendDeliveryParam() {
+        this.isDeliveryChecked = !this.isDeliveryChecked;
+        if ( this.isDeliveryChecked ) {
+            this.productsService.request.opt = 'Livraison%20Express';
+            console.log('delivery checked : ' + this.productsService.getFullRequest());
+        } else {
+            this.productsService.request.opt = '';
+            console.log('delivery unchecked ' + this.productsService.getFullRequest());
+        }
+    }
 }

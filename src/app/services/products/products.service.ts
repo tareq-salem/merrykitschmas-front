@@ -10,6 +10,15 @@ import { NavigationEnd, Router } from '@angular/router';
 export class ProductsService {
   urlProduct = undefined;
 
+    request = {
+        cat: '',
+        sub: '',
+        theme: '',
+        stock: '',
+        opt: '',
+        orderby: 'ddsc'
+    };
+
   constructor(private router: Router, private http: HttpClient) {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
@@ -19,6 +28,13 @@ export class ProductsService {
     });
   }
 
+  public getFullRequest() {
+        let url = environment.url + '/products';
+        if (this.request.orderby !== '') { url += '?orderby=' + this.request.orderby; }
+        if (this.request.stock !== '') { url += '?stock=' + this.request.stock; }
+        if (this.request.opt !== '') { url += '?opt=' + this.request.opt; }
+        return url;
+  }
 
   public sortProducts(sortParam) {
     const productsSortedUrl = environment.url + '/products?orderby=' + sortParam;
