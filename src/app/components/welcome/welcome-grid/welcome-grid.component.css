@@ -24,6 +24,8 @@ h2 {
 
 a {
     text-decoration: none;
+    cursor: pointer;
+
 }
 
 .card-container {
@@ -43,12 +45,12 @@ a {
 }
 
 .card-title {
-    height: 8%;
+    height: 18%;
     width: 100%;
 }
 
 .card-info {
-    height: 22%;
+    height: 12%;
     width: 100%;
 }
 
