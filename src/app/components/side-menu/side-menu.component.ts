@@ -12,6 +12,7 @@ export class SideMenuComponent implements OnInit {
     isWomanOpen = false;
     isChildOpen = false;
     isThemeOpen = false;
+
     isStockChecked = false;
     isDeliveryChecked = false;
 
@@ -28,15 +29,24 @@ export class SideMenuComponent implements OnInit {
   openManSubMenu() {
     this.isManOpen = !this.isManOpen;
     this.manArrow = (this.manArrow === 'arrow_right') ? 'arrow_drop_down' : 'arrow_right';
+    this.productsService.request.cat = 'Homme';
+    console.log(this.productsService.constructRequest());
+    this.sendRequestParam();
   }
 
   openWomanSubMenu() {
     this.isWomanOpen = !this.isWomanOpen;
     this.womanArrow = (this.womanArrow === 'arrow_right') ? 'arrow_drop_down' : 'arrow_right';
+    this.productsService.request.cat = 'Femme';
+    console.log(this.productsService.constructRequest());
+    this.sendRequestParam();
   }
   openChildrenSubMenu() {
     this.isChildOpen = !this.isChildOpen;
     this.childrenArrow = (this.childrenArrow === 'arrow_right') ? 'arrow_drop_down' : 'arrow_right';
+    this.productsService.request.cat = 'Enfant';
+    console.log(this.productsService.constructRequest());
+    this.sendRequestParam();
   }
   openThemeSubMenu() {
     this.isThemeOpen = !this.isThemeOpen;
@@ -47,21 +57,33 @@ export class SideMenuComponent implements OnInit {
         this.isStockChecked = !this.isStockChecked;
         if ( this.isStockChecked ) {
             this.productsService.request.stock = '1';
-            console.log('stock checked : ' + this.productsService.getFullRequest());
         } else {
             this.productsService.request.stock = '';
-            console.log('stock unchecked ' + this.productsService.getFullRequest());
         }
+        this.sendRequestParam();
     }
 
     sendDeliveryParam() {
         this.isDeliveryChecked = !this.isDeliveryChecked;
         if ( this.isDeliveryChecked ) {
             this.productsService.request.opt = 'Livraison%20Express';
-            console.log('delivery checked : ' + this.productsService.getFullRequest());
         } else {
             this.productsService.request.opt = '';
-            console.log('delivery unchecked ' + this.productsService.getFullRequest());
         }
+        this.sendRequestParam();
+    }
+
+    // ====================================================================================
+    sendRequestParam() {
+        this.productsService.sendRequest();
+    }
+    // ====================================================================================
+
+    showAllProducts() {
+        console.log('montrer tous les produits');
+        this.productsService.request.cat = '';
+        this.productsService.request.sub = '';
+        this.productsService.request.theme = '';
+        this.sendRequestParam();
     }
 }

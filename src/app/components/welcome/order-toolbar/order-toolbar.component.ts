@@ -17,7 +17,7 @@ export class OrderToolbarComponent implements OnInit {
     @Output() orderbyEvent = new EventEmitter<string>();
 
     ngOnInit() {
-        this.sendOrderby();
+        // this.sendOrderby();
         this.productsService.request.orderby = 'ddesc';
     }
 
@@ -37,43 +37,41 @@ export class OrderToolbarComponent implements OnInit {
     // }
 
     onDateClick(event) {
-        this.sendOrderby();
+        // this.sendOrderby();
         this.applySelectColor(event);
         this.priceArrow = '';
         if (this.dateArrow === 'arrow_drop_down') {
             this.dateArrow = 'arrow_drop_up';
             this.orderby = 'dasc';
             this.productsService.request.orderby = 'dasc';
-            console.log('DASC request to construct', this.productsService.getFullRequest());
         } else {
             this.dateArrow = 'arrow_drop_down';
             this.orderby = 'ddesc';
             this.productsService.request.orderby = 'ddesc';
-            console.log('DDESC request to construct', this.productsService.getFullRequest());
         }
+        this.sendRequestParam();
     }
 
     onPriceClick(event) {
         this.applySelectColor(event);
-        this.sendOrderby();
+        // this.sendOrderby();
         this.dateArrow = '';
         if (this.priceArrow === 'arrow_drop_down') {
             this.priceArrow = 'arrow_drop_up';
             this.orderby = 'pdesc';
             this.productsService.request.orderby = 'pdesc';
-            console.log('PDESC request to construct', this.productsService.getFullRequest());
         } else {
             this.priceArrow = 'arrow_drop_down';
             // this.orderby = 'pasc';
 
             this.productsService.request.orderby = 'pasc';
-            console.log('PAESC request to construct', this.productsService.getFullRequest());
         }
+        this.sendRequestParam();
     }
 
-    sendOrderby() {
-        this.orderbyEvent.emit(this.orderby);
-    }
+    // sendOrderby() {
+    //     this.orderbyEvent.emit(this.orderby);
+    // }
 
     applySelectColor(event) {
         const buttons = document.getElementsByClassName('order');
@@ -81,5 +79,9 @@ export class OrderToolbarComponent implements OnInit {
             buttons[i].classList.remove('isOrdering');
         }
         event.target.closest('button').classList.add('isOrdering');
+    }
+
+    sendRequestParam() {
+        this.productsService.sendRequest();
     }
 }
