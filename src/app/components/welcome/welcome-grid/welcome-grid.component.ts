@@ -1,30 +1,52 @@
-import { Component, OnInit, Input, OnChanges  } from '@angular/core';
-import {ProductsService} from '../../../services/products/products.service';
-import {Router} from '@angular/router';
+import { Component, OnInit, Input, OnChanges, OnDestroy  } from '@angular/core';
+import { ProductsService } from '../../../services/products/products.service';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-welcome-grid',
   templateUrl: './welcome-grid.component.html',
   styleUrls: ['./welcome-grid.component.css']
 })
-export class WelcomeGridComponent implements OnInit, OnChanges {
-
+export class WelcomeGridComponent implements OnInit, OnChanges, OnDestroy {
     numberOfCols = 4;
     @Input() orderby: string;
     public products: any[];
+    // ===================================================================================================
+    requestSubscription: Subscription;
+    // ===================================================================================================
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    message: any;
+    subscription: Subscription;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     constructor(
         private router: Router,
-        private productsService: ProductsService
-    ) { }
+        private productsService: ProductsService) {
+            // ===================================================================================================
+            this.requestSubscription = this.productsService.getRequest().subscribe(products => {this.products = products; });
+            // ===================================================================================================
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            this.subscription = this.productsService.getMessage().subscribe(message => { this.message = message; });
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
 
     ngOnChanges() {
-        this.getProductsRequest(this.orderby);
+        this.getProductsRequest();
     }
 
     ngOnInit() {
         this.onResize();
+        // this.productsService.request.subscribe(() => console.log('le cul de Yass sur la commode') );
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ngOnDestroy() {
+        this.requestSubscription.unsubscribe();
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     onResize() {
         if (window.innerWidth >= 1440) {
@@ -40,13 +62,24 @@ export class WelcomeGridComponent implements OnInit, OnChanges {
         }
     }
 
-    getProductsRequest(params): void {
-        this.productsService.sortProducts(params)
+    getProductsRequest(): void {
+        // this.productsService.sortProducts(params)
+        //     .then((products: any[]) => this.products = products)
+        //     .catch(error => console.log(error));
+        this.productsService.callRequest()
             .then((products: any[]) => this.products = products)
             .catch(error => console.log(error));
     }
 
     getProductRoute(id): void {
         this.router.navigate(['/product', id]);
+    }
+
+    onClickRequest() {
+        const request = this.productsService.constructRequest();
+        console.log(request);
+        this.productsService.callRequest()
+            .then((products: any[]) => this.products = products)
+            .catch(error => console.log(error));
     }
 }

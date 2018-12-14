@@ -1,3 +1,4 @@
+import { ProductsService } from './../../../services/products/products.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -9,44 +10,68 @@ export class OrderToolbarComponent implements OnInit {
 
     dateArrow = 'arrow_drop_down';
     priceArrow = '';
-    constructor() { }
-    orderby = 'ddesc';
+    // orderby = 'ddesc';
+
+    constructor(private productsService: ProductsService) { }
 
     @Output() orderbyEvent = new EventEmitter<string>();
 
     ngOnInit() {
-        this.sendOrderby();
+        // this.sendOrderby();
+        this.productsService.request.orderby = 'ddesc';
     }
 
+    // onDateClick(event) {
+    //     this.sendOrderby();
+    //     this.priceArrow = '';
+    //     if (this.dateArrow === 'arrow_drop_down') {
+    //         this.dateArrow = 'arrow_drop_up';
+    //         this.orderby = 'ddesc';
+    //         this.productsService.request.orderby = 'ddesc';
+    //     } else {
+    //         this.dateArrow = 'arrow_drop_down';
+    //         this.orderby = 'dasc';
+    //         this.productsService.request.orderby = 'dasc';
+    //     }
+    //     this.applySelectColor(event);
+    // }
+
     onDateClick(event) {
-        this.sendOrderby();
+        // this.sendOrderby();
+        this.applySelectColor(event);
         this.priceArrow = '';
         if (this.dateArrow === 'arrow_drop_down') {
             this.dateArrow = 'arrow_drop_up';
-            this.orderby = 'dasc';
+            // this.orderby = 'dasc';
+            this.productsService.request.orderby = 'dasc';
         } else {
             this.dateArrow = 'arrow_drop_down';
-            this.orderby = 'ddesc';
+            // this.orderby = 'ddesc';
+            this.productsService.request.orderby = 'ddesc';
         }
-        this.applySelectColor(event);
+        this.sendRequestParam();
     }
 
     onPriceClick(event) {
-        this.sendOrderby();
+        this.applySelectColor(event);
+        // this.sendOrderby();
         this.dateArrow = '';
         if (this.priceArrow === 'arrow_drop_down') {
             this.priceArrow = 'arrow_drop_up';
-            this.orderby = 'pasc';
+            // this.orderby = 'pdesc';
+            this.productsService.request.orderby = 'pasc';
         } else {
             this.priceArrow = 'arrow_drop_down';
-            this.orderby = 'pdesc';
+            // this.orderby = 'pasc';
+
+            this.productsService.request.orderby = 'pdesc';
         }
-        this.applySelectColor(event);
+        this.sendRequestParam();
     }
 
-    sendOrderby() {
-        this.orderbyEvent.emit(this.orderby);
-    }
+    // sendOrderby() {
+    //     this.orderbyEvent.emit(this.orderby);
+    // }
 
     applySelectColor(event) {
         const buttons = document.getElementsByClassName('order');
@@ -54,5 +79,9 @@ export class OrderToolbarComponent implements OnInit {
             buttons[i].classList.remove('isOrdering');
         }
         event.target.closest('button').classList.add('isOrdering');
+    }
+
+    sendRequestParam() {
+        this.productsService.sendRequest();
     }
 }

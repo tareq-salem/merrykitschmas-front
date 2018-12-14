@@ -60,6 +60,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { LoginComponent } from './components/login/login.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { EuroCurrencyPipe } from './pipes/euroCurrency/euro-currency.pipe';
+import { NoProductsComponent } from './components/shared/no-products/no-products.component';
 const routes: Routes = [
     { path: 'sigin', component: SigninComponent },
     { path: 'login', component: LoginComponent },
@@ -97,7 +98,8 @@ const routes: Routes = [
     LoginComponent,
     CheckOutComponent,
     SigninComponent,
-    EuroCurrencyPipe
+    EuroCurrencyPipe,
+    NoProductsComponent
   ],
   imports: [
     BrowserModule,

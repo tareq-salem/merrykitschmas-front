@@ -1,3 +1,5 @@
+<app-no-products *ngIf="products == 0"></app-no-products>
+
 <mat-grid-list [cols]='numberOfCols' rowHeight="1:1" (window:resize)="onResize()">
     <mat-grid-tile *ngFor="let product of products">
         <ul class="card-container">
@@ -13,7 +15,6 @@
             </li>
             <li class="card-info">
                 <p>{{product?.price | euroCurrency}}</p>
-                <app-cart-button></app-cart-button>
             </li>
         </ul>
     </mat-grid-tile>
