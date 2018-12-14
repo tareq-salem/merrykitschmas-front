@@ -6,23 +6,23 @@
 
     <a mat-list-item (click)="openManSubMenu()"><i class="material-icons">{{manArrow}}</i>Homme</a>
     <nav>
-        <a mat-list-item *ngIf="isManOpen">Pulls</a>
-        <a mat-list-item *ngIf="isManOpen">Bonnets</a>
-        <a mat-list-item *ngIf="isManOpen">Chaussettes</a>
+        <a mat-list-item *ngIf="isManOpen" (click)="openManPullsMenu()">Pulls</a>
+        <a mat-list-item *ngIf="isManOpen" (click)="openManBonnetsMenu()">Bonnets</a>
+        <a mat-list-item *ngIf="isManOpen" (click)="openManChaussettesMenu()">Chaussettes</a>
     </nav>
     
     <a mat-list-item (click)="openWomanSubMenu()"><i class="material-icons">{{womanArrow}}</i>Femme</a>
     <nav>
-        <a mat-list-item *ngIf="isWomanOpen">Pulls</a>
-        <a mat-list-item *ngIf="isWomanOpen">Bonnets</a>
-        <a mat-list-item *ngIf="isWomanOpen">Chaussettes</a>
+        <a mat-list-item *ngIf="isWomanOpen" (click)="openWomanPullsMenu()">Pulls</a>
+        <a mat-list-item *ngIf="isWomanOpen" (click)="openWomanBonnetsMenu()">Bonnets</a>
+        <a mat-list-item *ngIf="isWomanOpen" (click)="openWomanChaussettesMenu()">Chaussettes</a>
     </nav>
 
     <a mat-list-item (click)="openChildrenSubMenu()"><i class="material-icons">{{childrenArrow}}</i>Enfant</a>
     <nav>
-        <a mat-list-item *ngIf="isChildOpen">Pulls</a>
-        <a mat-list-item *ngIf="isChildOpen">Bonnets</a>
-        <a mat-list-item *ngIf="isChildOpen">Chaussettes</a>
+        <a mat-list-item *ngIf="isChildOpen" (click)="openChildPullsMenu()">Pulls</a>
+        <a mat-list-item *ngIf="isChildOpen" (click)="openChildBonnetsMenu()">Bonnets</a>
+        <a mat-list-item *ngIf="isChildOpen" (click)="openChildChaussettesMenu()">Chaussettes</a>
     </nav>
     <mat-divider></mat-divider>
     

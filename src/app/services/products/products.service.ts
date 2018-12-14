@@ -43,6 +43,7 @@ export class ProductsService {
         let url = environment.url + '/products?';
         if (this.request.orderby !== '') { url += 'orderby=' + this.request.orderby; }
         if (this.request.cat !== '') { url += '&cat=' + this.request.cat; }
+        if (this.request.sub !== '') { url += '&sub=' + this.request.sub; }
         if (this.request.stock !== '') { url += '&stock=' + this.request.stock; }
         if (this.request.opt !== '') { url += '&opt=' + this.request.opt; }
         return url;

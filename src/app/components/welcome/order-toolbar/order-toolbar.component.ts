@@ -10,7 +10,7 @@ export class OrderToolbarComponent implements OnInit {
 
     dateArrow = 'arrow_drop_down';
     priceArrow = '';
-    orderby = 'ddesc';
+    // orderby = 'ddesc';
 
     constructor(private productsService: ProductsService) { }
 
@@ -42,11 +42,11 @@ export class OrderToolbarComponent implements OnInit {
         this.priceArrow = '';
         if (this.dateArrow === 'arrow_drop_down') {
             this.dateArrow = 'arrow_drop_up';
-            this.orderby = 'dasc';
+            // this.orderby = 'dasc';
             this.productsService.request.orderby = 'dasc';
         } else {
             this.dateArrow = 'arrow_drop_down';
-            this.orderby = 'ddesc';
+            // this.orderby = 'ddesc';
             this.productsService.request.orderby = 'ddesc';
         }
         this.sendRequestParam();
@@ -58,13 +58,13 @@ export class OrderToolbarComponent implements OnInit {
         this.dateArrow = '';
         if (this.priceArrow === 'arrow_drop_down') {
             this.priceArrow = 'arrow_drop_up';
-            this.orderby = 'pdesc';
-            this.productsService.request.orderby = 'pdesc';
+            // this.orderby = 'pdesc';
+            this.productsService.request.orderby = 'pasc';
         } else {
             this.priceArrow = 'arrow_drop_down';
             // this.orderby = 'pasc';
 
-            this.productsService.request.orderby = 'pasc';
+            this.productsService.request.orderby = 'pdesc';
         }
         this.sendRequestParam();
     }
