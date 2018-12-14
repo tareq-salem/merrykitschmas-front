@@ -10,11 +10,9 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./welcome-grid.component.css']
 })
 export class WelcomeGridComponent implements OnInit, OnChanges, OnDestroy {
-
     numberOfCols = 4;
     @Input() orderby: string;
     public products: any[];
-
     // ===================================================================================================
     requestSubscription: Subscription;
     // ===================================================================================================

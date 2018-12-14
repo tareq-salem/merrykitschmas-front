@@ -16,7 +16,6 @@ export class ProductRecommendationsComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    // On recupere tous les produits de la meme categorie en guise de suggestions
     this.http.get(this.url)
       .subscribe( (res: any[]) => {
         this.suggestions = res;

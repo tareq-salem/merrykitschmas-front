@@ -13,10 +13,10 @@ export class ProductUsersCommentsComponent implements OnInit {
   ngOnInit() {
   }
 
-  scrollPage() {
-    // window.scrollTo(0, 3000);
-    window.scroll(0, 2000);
-    console.log('coucouille');
-  }
-
+  public scrollPage(): void {
+    window.scroll({
+      top: 1120,
+      left: 0,
+      behavior: 'smooth',
+    });
 }

@@ -11,27 +11,27 @@ import { Subject } from 'rxjs/Subject';
   providedIn: 'root'
 })
 export class ProductsService {
+  products: any;
+  private productsSubject = new Subject<any>();
+  request = {
+    cat: '',
+    sub: '',
+    theme: '',
+    stock: '',
+    opt: '',
+    orderby: ''
+  };
+  
   urlProduct = undefined;
-
-    request = {
-        cat: '',
-        sub: '',
-        theme: '',
-        stock: '',
-        opt: '',
-        orderby: ''
-    };
-
-    // =============================================================================
-    products: any;
-    private productsSubject = new Subject<any>();
-    // =============================================================================
-
-    ////////////////////////////////////////////////////////////////////////////////
-    private subject = new Subject<any>();
-    ////////////////////////////////////////////////////////////////////////////////
-
+  sizeQtes: Array<number> = [];
+  sizeNames: Array<string> = [];
+  
   constructor(private router: Router, private http: HttpClient) {
+    this.getUrlProduct();
+  }
+
+  /* -------------------------- GET URL -------------------------- */
+  private getUrlProduct() {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
         this.urlProduct = environment.url + e.url;
@@ -60,9 +60,26 @@ export class ProductsService {
       });
   }
 
+  /* -------------------------- CRUD -------------------------- */
+  getAll() {
+    return this.http.get(environment.url + '/products?order=ddesc').pipe(
+        map( res => res )
+    );
+  }
+
+  get() {
+    return this.http.get(this.urlProduct).pipe(
+        map( (res) => {
+          this.getProductSizesQtes(res);
+          this.getProductSizesNames(res);
+          return res;
+        })
+    );
+  }
+  
+  /* -------------------------- SORT PRODUCTS -------------------------- */
 //   public sortProducts(sortParam) {
 //     const productsSortedUrl = environment.url + '/products?orderby=' + sortParam;
-
 //     return new Promise ((resolve, reject) => {
 //       this.http.get(productsSortedUrl).subscribe(
 //           (response: any[]) => { resolve(response); console.log(sortParam); },
@@ -70,42 +87,7 @@ export class ProductsService {
 //       );
 //     });
 //   }
-
-  /* -------------------------- CRUD -------------------------- */
-  // create(product) {
-  //   this.http.post(this.urlProduct, product);
-  // }
-
-  getAll() {
-    return this.http.get(environment.url + '/products?order=ddesc').pipe(
-        map( res => res )
-    );
-  }
-  // VERSION JULIEN
-  // getAllProducts() {
-  //   const allProducts = environment.url + '/products';
-  //
-  //   return new Promise ((resolve, reject) => {
-  //     this.http.get(allProducts).subscribe(
-  //         (response: any[]) => {
-  //           resolve(response);
-  //         },
-  //         (error) => reject(error)
-  //     );
-  //   });
-  // }
-
-  get() {
-    return this.http.get(this.urlProduct).pipe(
-        map( res => res )
-    );
-  }
-
-  update() {}
-
-  delete() {}
-
-    // =============================================================================
+  
     sendRequest() {
         this.constructRequest();
         this.callRequest()
@@ -119,16 +101,19 @@ export class ProductsService {
     getRequest(): Observable<any> {
         return this.productsSubject.asObservable();
     }
-    // =============================================================================
 
-    ////////////////////////////////////////////////////////////////////////////////
-    sendMessage(message: string) {
-        this.subject.next({ text: message });
+  /* -------------------------- SPECIFIC BEHAVIOR -------------------------- */
+  private getProductSizesQtes (res) {
+    this.sizeQtes = [];
+    for ( let i = 0; i < res[0].productParameters.length; i++ )  {
+      this.sizeQtes.push( res[0].productParameters[i].quantity );
     }
-
-    getMessage(): Observable<any> {
-        return this.subject.asObservable();
+    console.log('this.sizeQtes : ', this.sizeQtes);
+  }
+  private getProductSizesNames (res) {
+    this.sizeNames = [];
+    for ( let i = 0; i < res[0].productParameters.length; i++ )  {
+      this.sizeNames.push( res[0].productParameters[i].size );
     }
-    ////////////////////////////////////////////////////////////////////////////////
-
+  }
 }
