@@ -1,17 +1,12 @@
 <br>
-<ul>
-  <li (click)="scrollPage()"
-      *ngIf="commentQte === 0">
+<ul (click)="scrollPage()">
+  <li *ngIf="commentQte === 0">
     Pas de commentaire pour ce produit, donnez votre avis !
   </li>
-  <li (click)="scrollPage()"
-      *ngIf="commentQte && (commentQte === 1)"
-  >
+  <li *ngIf="commentQte && (commentQte === 1)">
     1 commentaire client reçu pour ce produit
   </li>
-  <li (click)="scrollPage()"
-      *ngIf="commentQte && (commentQte > 1)"
-  >
+  <li *ngIf="commentQte && (commentQte > 1)">
     {{ commentQte }} commentaires clients reçus pour ce produit
   </li>
 </ul>

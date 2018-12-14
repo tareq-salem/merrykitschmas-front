@@ -12,9 +12,11 @@ export class WelcomeGridComponent implements OnInit, OnChanges {
     numberOfCols = 4;
     @Input() orderby: string;
     public products: any[];
+
     constructor(
         private router: Router,
-        private productsService: ProductsService) { }
+        private productsService: ProductsService
+    ) { }
 
     ngOnChanges() {
         this.getProductsRequest(this.orderby);

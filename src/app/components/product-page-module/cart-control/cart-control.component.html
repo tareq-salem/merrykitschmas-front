@@ -53,12 +53,12 @@
     <section class="select">
         <span>Combien de produits desirez-vous ? </span>
         <input required formControlName="quantities"
-               min="0" max="{{ availableStockForSize + 1 }}"
-               (change)="compareStockAndQtesSelected(qte)" #qte
+               min="0" max="{{ availableStockPerSizes + 1 }}"
+               (change)="compareTotalStockAndQtesSelected(qte)" #qte
                matInput class="mat-select quantities"
                placeholder="Quantite" type="number">
     </section>
-    <!-- Si qteSelect non renseignee OU < 0 OU > au stock -->
+    <!-- Si qteSelect non renseignee | OU < 0 | OU > au stock -->
     <mat-error *ngIf="quantities.touched && quantities.invalid">
         <mat-error *ngIf="quantities.hasError('min')">
             Entrez une quantite superieur ou egale a 1 au minimum.
@@ -70,7 +70,6 @@
             Selectionnez au moins 1 produit.
         </mat-error>
     </mat-error>
-
 
     <!-- BOUTONS -->
     <div class="btn">

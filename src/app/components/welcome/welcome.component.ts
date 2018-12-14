@@ -5,13 +5,10 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent {
     orderby: string;
 
     constructor() {
-    }
-
-    ngOnInit() {
     }
 
     receiveOrderby($event) {
