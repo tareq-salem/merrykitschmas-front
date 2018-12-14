@@ -1,18 +1,17 @@
-<h5 *ngIf="datas">{{ datas.length }} commentaires</h5>
-<section class="main" *ngFor="let data of datas | slice:0:10">
+<h5 *ngIf="comments">{{ comments.length }} commentaires</h5>
+<section class="main" *ngFor="let comment of comments | slice:0:10">
 
   <div class="avatar">
-    <img class="avatar-img" src="{{ data.user.avatar }}" alt="">
+    <img class="avatar-img" src="{{ avatar }}" alt="">
   </div>
 
   <div class="comment-informations">
-    <h5>{{ data.user.fistname }} {{ data.user.lastname }}</h5>
-    <span>{{ data.comment.date }}</span>
+    <h5>{{ comment.user.username }}</h5>
+    <span>{{ comment.created_at | date:'fullDate'}}</span>
   </div>
 
   <div class="comment-description">
-    <h5>{{ data.comment.title }}</h5>
-    <p>{{ data.comment.content }}</p>
+    <h5>{{ comment.content }}</h5>
   </div>
 
 </section>

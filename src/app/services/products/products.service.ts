@@ -11,35 +11,35 @@ import { Subject } from 'rxjs/Subject';
   providedIn: 'root'
 })
 export class ProductsService {
-  products: any;
-  private productsSubject = new Subject<any>();
-  request = {
-    cat: '',
-    sub: '',
-    theme: '',
-    stock: '',
-    opt: '',
-    orderby: ''
-  };
-  
-  urlProduct = undefined;
-  sizeQtes: Array<number> = [];
-  sizeNames: Array<string> = [];
-  
-  constructor(private router: Router, private http: HttpClient) {
-    this.getUrlProduct();
-  }
+    products: any;
+    private urlProduct = undefined;
+    public sizeQtes: Array<number> = [];
+    public sizeNames: Array<string> = [];
+    public comments: Array<any> = [];
+    private productsSubject = new Subject<any>();
+    request = {
+        cat: '',
+        sub: '',
+        theme: '',
+        stock: '',
+        opt: '',
+        orderby: ''
+    };
 
-  /* -------------------------- GET URL -------------------------- */
-  private getUrlProduct() {
+    constructor(private router: Router, private http: HttpClient) {
+    this.getUrlProduct();
+    }
+
+    /* -------------------------- GET URL -------------------------- */
+    private getUrlProduct() {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
         this.urlProduct = environment.url + e.url;
       }
     });
-  }
+    }
 
-  public constructRequest() {
+    public constructRequest() {
         let url = environment.url + '/products?';
         if (this.request.orderby !== '') { url += 'orderby=' + this.request.orderby; }
         if (this.request.cat !== '') { url += '&cat=' + this.request.cat; }
@@ -47,10 +47,10 @@ export class ProductsService {
         if (this.request.stock !== '') { url += '&stock=' + this.request.stock; }
         if (this.request.opt !== '') { url += '&opt=' + this.request.opt; }
         return url;
-  }
+    }
 
-// public call request
-  public callRequest() {
+    // public call request
+    public callRequest() {
       const url = this.constructRequest();
       return new Promise ((resolve, reject) => {
         this.http.get(url).subscribe(
@@ -58,36 +58,37 @@ export class ProductsService {
             (error) => reject(error)
         );
       });
-  }
+    }
 
-  /* -------------------------- CRUD -------------------------- */
-  getAll() {
+    /* -------------------------- CRUD -------------------------- */
+    getAll() {
     return this.http.get(environment.url + '/products?order=ddesc').pipe(
         map( res => res )
     );
-  }
+    }
 
-  get() {
+    get() {
     return this.http.get(this.urlProduct).pipe(
         map( (res) => {
           this.getProductSizesQtes(res);
           this.getProductSizesNames(res);
+          this.getProductComments(res);
           return res;
         })
     );
-  }
-  
-  /* -------------------------- SORT PRODUCTS -------------------------- */
-//   public sortProducts(sortParam) {
-//     const productsSortedUrl = environment.url + '/products?orderby=' + sortParam;
-//     return new Promise ((resolve, reject) => {
-//       this.http.get(productsSortedUrl).subscribe(
-//           (response: any[]) => { resolve(response); console.log(sortParam); },
-//           (error) => reject(error)
-//       );
-//     });
-//   }
-  
+    }
+
+    /* -------------------------- SORT PRODUCTS -------------------------- */
+    //   public sortProducts(sortParam) {
+    //     const productsSortedUrl = environment.url + '/products?orderby=' + sortParam;
+    //     return new Promise ((resolve, reject) => {
+    //       this.http.get(productsSortedUrl).subscribe(
+    //           (response: any[]) => { resolve(response); console.log(sortParam); },
+    //           (error) => reject(error)
+    //       );
+    //     });
+    //   }
+
     sendRequest() {
         this.constructRequest();
         this.callRequest()
@@ -102,18 +103,25 @@ export class ProductsService {
         return this.productsSubject.asObservable();
     }
 
-  /* -------------------------- SPECIFIC BEHAVIOR -------------------------- */
-  private getProductSizesQtes (res) {
+    /* -------------------------- GET SPECIFIC PRODUCT VALUES -------------------------- */
+    private getProductSizesQtes (res) {
     this.sizeQtes = [];
     for ( let i = 0; i < res[0].productParameters.length; i++ )  {
       this.sizeQtes.push( res[0].productParameters[i].quantity );
     }
-    console.log('this.sizeQtes : ', this.sizeQtes);
-  }
-  private getProductSizesNames (res) {
+
+    }
+    private getProductSizesNames (res) {
     this.sizeNames = [];
     for ( let i = 0; i < res[0].productParameters.length; i++ )  {
       this.sizeNames.push( res[0].productParameters[i].size );
     }
-  }
+    }
+
+    private getProductComments (res) {
+    this.comments = [];
+    for ( let i = 0; i < res[0].comments.length; i++ )  {
+      this.comments.push( res[0].comments[i] );
+    }
+    }
 }

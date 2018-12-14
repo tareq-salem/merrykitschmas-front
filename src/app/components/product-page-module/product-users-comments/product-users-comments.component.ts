@@ -8,7 +8,8 @@ import {Component, Input, OnInit} from '@angular/core';
 export class ProductUsersCommentsComponent implements OnInit {
   @Input() commentQte: number;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
@@ -19,4 +20,5 @@ export class ProductUsersCommentsComponent implements OnInit {
       left: 0,
       behavior: 'smooth',
     });
+  }
 }
