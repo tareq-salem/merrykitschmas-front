@@ -17,20 +17,12 @@ export class WelcomeGridComponent implements OnInit, OnChanges, OnDestroy {
     requestSubscription: Subscription;
     // ===================================================================================================
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    message: any;
-    subscription: Subscription;
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
     constructor(
         private router: Router,
         private productsService: ProductsService) {
             // ===================================================================================================
             this.requestSubscription = this.productsService.getRequest().subscribe(products => {this.products = products; });
             // ===================================================================================================
-            ////////////////////////////////////////////////////////////////////////////////////////////////////
-            this.subscription = this.productsService.getMessage().subscribe(message => { this.message = message; });
-            ////////////////////////////////////////////////////////////////////////////////////////////////////
         }
 
     ngOnChanges() {
@@ -75,11 +67,4 @@ export class WelcomeGridComponent implements OnInit, OnChanges, OnDestroy {
         this.router.navigate(['/product', id]);
     }
 
-    onClickRequest() {
-        const request = this.productsService.constructRequest();
-        console.log(request);
-        this.productsService.callRequest()
-            .then((products: any[]) => this.products = products)
-            .catch(error => console.log(error));
-    }
 }

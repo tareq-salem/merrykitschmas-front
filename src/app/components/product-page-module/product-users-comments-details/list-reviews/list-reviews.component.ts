@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CommentsService} from '../../../../services/comments/comments.service';
+import {ProductsService} from '../../../../services/products/products.service';
 
 @Component({
   selector: 'app-list-reviews',
@@ -8,20 +9,14 @@ import {CommentsService} from '../../../../services/comments/comments.service';
   styleUrls: ['./list-reviews.component.css']
 })
 export class ListReviewsComponent implements OnInit {
-    @Input() product: any[];
+    comments: any[];
+    avatar = 'https://www.pourquoidocteur.fr/media/article/thunbs/uploded_jimcarrey-1435850366.jpg';
 
-    datas: any[];
-
-    constructor(
-        private http: HttpClient,
-        private commentsService: CommentsService) {
+    constructor(private productsService: ProductsService) {
     }
 
     ngOnInit() {
-        this.commentsService.getAll()
-            .subscribe((res: any[]): void => {
-                this.datas = res;
-            });
+        this.comments = this.productsService.comments;
     }
 
 }
